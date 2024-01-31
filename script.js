@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(pokemonURL)
             .then(response => response.json())
             .then(data => {
-                // extracting results data from pokemon response
                 const listOfPokemon = data.results;
 
                 // adding item to pokemon list
@@ -18,16 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function addPokemonItem(data) {
         const pokemonListElement = document.getElementById("pokemonListElement");
 
-        // displaying pokemon image and name for each item
         data.forEach(item => {
             // creating div and text element for pokemon item
             const pokemonItem = document.createElement('div');
             const pokemonName = document.createElement('p');
 
-            // getting pokemon ID
             const pokemonID = item.url.split('/')[6];
-
-            // applying styling to pokemon item
             pokemonItem.className = 'pokemon-item';
 
             // getting and setting pokemon image and name
