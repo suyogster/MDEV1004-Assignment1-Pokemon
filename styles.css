@@ -1,4 +1,40 @@
+/* removing default margin and padding */
 * {
     margin: 0;
     padding: 0;
+}
+/* styles for the container class */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 100px 200px;
+    padding:  40px;
+    border: 3px solid #1c1c1c;
+}
+p {
+    text-align: center;
+    border: 1px solid #1c1c1c;
+    padding: 8px;
+}
+h3 {
+    border: 1px solid #1c1c1c;
+    padding: 10px;
+}
+.pokemon-list {
+    display: flex;
+    overflow: auto;
+    margin-top: 20px;
+}
+.pokemon-item {
+    text-align: center;
+    cursor: pointer;
+    padding: 30px;
+    margin: 5px;
+    border-radius: 10px;
+}
+.pokemon-image {
+    max-width: 120px;
+    max-height: auto;
 }
