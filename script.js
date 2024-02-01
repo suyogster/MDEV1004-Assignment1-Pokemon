@@ -2,7 +2,7 @@
  * Filename: script.js
  * Student Name / Student ID:
  * Suyog Shrestha, 200565523
- * Puja Shrestha, 2005
+ * Puja Shrestha, 200573293
  * Date: Feb 1st, 2024
  */
 
