@@ -1,10 +1,10 @@
-/* removing default margin and padding */
+/* Reset default margin and padding for all elements */
 * {
   margin: 0;
   padding: 0;
 }
 
-/* styles for the container class */
+/* Styles for the container class */
 .container {
   display: flex;
   flex-direction: column;
@@ -15,23 +15,27 @@
   border: 3px solid #1c1c1c;
 }
 
+/* Styles for Pokemon names */
 .pokemon-name {
   text-align: center;
   border: 1px solid #1c1c1c;
   padding: 8px;
 }
 
+/* Styles for h3 elements */
 h3 {
   border: 1px solid #1c1c1c;
   padding: 10px;
 }
 
+/* Styles for the Pokemon list */
 .pokemon-list {
   display: flex;
   overflow: auto;
   margin-top: 20px;
 }
 
+/* Styles for Pokemon list items */
 .pokemon-item {
   text-align: center;
   cursor: pointer;
@@ -40,11 +44,13 @@ h3 {
   border-radius: 10px;
 }
 
+/* Styles for Pokemon images */
 .pokemon-image {
   max-width: 120px;
   max-height: auto;
 }
 
+/* Styles for Pokemon details */
 .pokemonDetail {
   display: flex;
   flex-direction: row;
@@ -54,6 +60,7 @@ h3 {
   justify-content: space-between;
 }
 
+/* Styles for detail elements */
 .detail {
   padding: 5px;
   border: 1px solid #1c1c1c;
@@ -62,7 +69,7 @@ h3 {
   text-align: left;
 }
 
+/* Styles for abilities text */
 .abilities-text {
   color: cadetblue;
 }
-

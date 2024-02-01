@@ -1,21 +1,28 @@
 /**
  * Filename: script.js
- * Student Name: [Your Name]
- * Student ID: [Your Student ID]
- * Date: [Date]
+ * Student Name / Student ID:
+ * Suyog Shrestha, 200565523
+ * Puja Shrestha, 2005
+ * Date: Feb 1st, 2024
  */
 
-const pokemonURL = 'https://pokeapi.co/api/v2/pokemon?limit=5';
-
+const pokemonURL = 'https://pokeapi.co/api/v2/pokemon?offset=20&limit=5';
 let currentURL = '';
 
+// Event listener for when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
+  /**
+   * Sets the current URL in the UI
+   * @param {string} url - The URL to be displayed
+   */
   function setCurrentUrlBox(url) {
     const urlBox = document.getElementById('url-box');
     urlBox.textContent = url;
   }
 
-  // fetching pokemon data
+  /**
+   * @description - Fetches data of all Pokemon
+   */
   function fetchAllPokemon() {
     setCurrentUrlBox(pokemonURL);
     fetch(pokemonURL)
@@ -23,12 +30,16 @@ document.addEventListener('DOMContentLoaded', function () {
       .then((data) => {
         const listOfPokemon = data.results;
 
-        // adding item to pokemon list
+        // Adding items to the Pokemon list
         addPokemonItem(listOfPokemon);
       });
   }
 
-  //fetching individual data of pokemon
+  /**
+   * Fetches individual data of a Pokemon
+   * @param {string} url - The URL of the Pokemon
+   * @returns {Promise} - Resolves to the Pokemon data
+   */
   async function getPokemonInfo(url) {
     try {
       const response = await fetch(url);
@@ -39,6 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  /**
+   * Adds Pokemon items to the list
+   * @param {Array} data - List of Pokemon data
+   */
   function addPokemonItem(data) {
     const pokemonListElement = document.getElementById('pokemonListElement');
     const specsDetailSection = document.getElementById('specs-details');
@@ -47,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     abilitiesDetailSection.style.display = 'none';
 
     data.forEach((item) => {
-      // creating div and text element for pokemon item
+      // Creating div and text element for each Pokemon item
       const pokemonItem = document.createElement('div');
       const pokemonName = document.createElement('p');
       pokemonName.classList.add('pokemon-name');
@@ -55,20 +70,23 @@ document.addEventListener('DOMContentLoaded', function () {
       const pokemonID = item.url.split('/')[6];
       pokemonItem.className = 'pokemon-item';
 
-      // getting and setting pokemon image and name
+      // Setting Pokemon image and name
       pokemonItem.innerHTML = `
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" 
-                    alt="${item.name}" class="pokemon-image">`;
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonID}.png" 
+            alt="${item.name}" class="pokemon-image">`;
       pokemonName.textContent = item.name;
 
-      // appending pokemon items to pokemon list element
+      // Appending Pokemon items to the list
       pokemonItem.addEventListener('click', () => showPokemonDetails(item));
       pokemonItem.appendChild(pokemonName);
       pokemonListElement.appendChild(pokemonItem);
     });
   }
 
-  // Function to show detailed Pokemon information
+  /**
+   * Shows detailed information about a Pokemon
+   * @param {*} data - The Pokemon data
+   */
   async function showPokemonDetails(data) {
     setCurrentUrlBox(data.url);
     const pokemon = await getPokemonInfo(data.url);
@@ -79,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     specsDetails.style.display = 'block';
 
+    // Displaying Pokemon details
     const name = document.createElement('p');
     name.innerHTML = `<b>Name:</b> ${pokemon.name}`;
     specsDetails.appendChild(name);
@@ -95,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
     abilities.innerHTML = `<b>Abilities:</b>`;
     specsDetails.appendChild(abilities);
 
+    // Displaying Pokemon abilities
     pokemon.abilities.forEach(async (ability) => {
       const abilityData = await getPokemonInfo(ability.ability.url);
       const abilityElement = document.createElement('div');
@@ -102,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
       abilityElement.innerHTML = 'Abilities: ';
       abilityElement.innerHTML = `
         <p>${ability.ability.name}, </p>
-    `;
+      `;
       abilityElement.classList.add('abilities-text');
       abilityElement.addEventListener('click', () =>
         showAbilityDetails(abilityData, ability.ability.url)
@@ -111,7 +131,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Function to show detailed ability information
+  /**
+   * Shows detailed information about a Pokemon ability
+   * @param {object} ability - The ability data
+   * @param {string} url - The URL of the ability
+   */
   function showAbilityDetails(ability, url) {
     setCurrentUrlBox(url);
     const abilitiesDetail = document.getElementById('abilities-details');
@@ -120,26 +144,28 @@ document.addEventListener('DOMContentLoaded', function () {
       abilitiesDetail.removeChild(abilitiesDetail.firstChild);
     }
 
+    // Displaying ability details
     const abilityDetails = document.createElement('div');
     abilityDetails.classList.add('ability-details');
     abilityDetails.innerHTML = `
-        <h4>Ability Name: ${ability.name}</h4>
-        <p>Ability Effect: ${
-          ability.effect_entries.find((entry) => entry.language.name === 'en')
-            .effect
-        }</p>
-        <p>Short Effect: ${
-          ability.effect_entries.find((entry) => entry.language.name === 'en')
-            .short_effect
-        }</p>
-        <p>Flavor Text: ${
-          ability.flavor_text_entries.find(
-            (entry) => entry.language.name === 'en'
-          ).flavor_text
-        }</p>
+      <h4><b>Ability Name:</b> ${ability.name}</h4>
+      <p><b>Ability Effect:</b> ${
+        ability.effect_entries.find((entry) => entry.language.name === 'en')
+          .effect
+      }</p>
+      <p><b>Short Effect:</b> ${
+        ability.effect_entries.find((entry) => entry.language.name === 'en')
+          .short_effect
+      }</p>
+      <p><b>Flavor Text:</b> ${
+        ability.flavor_text_entries.find(
+          (entry) => entry.language.name === 'en'
+        ).flavor_text
+      }</p>
     `;
     abilitiesDetail.appendChild(abilityDetails);
   }
 
+  // Fetch data of all Pokemon when the page loads
   fetchAllPokemon();
 });
