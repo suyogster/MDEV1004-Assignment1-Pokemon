@@ -4,10 +4,14 @@ Group Assignment implementing RestAPI functionality, Internal Documentation, Ver
 
 ## Folder Structure \n
 
-css
+### css
 
-- style.css
-  js
-- script.js
+- css/style.css
+
+### js
+
+- js/script.js
+
+### html
 
 - index.html
