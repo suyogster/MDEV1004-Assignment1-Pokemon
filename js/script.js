@@ -91,7 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
     setCurrentUrlBox(data.url);
     const pokemon = await getPokemonInfo(data.url);
     const specsDetails = document.getElementById("specs-details");
+    const abilitiesDetail = document.getElementById("abilities-details");
 
+    abilitiesDetail.style.display = "none";
     while (specsDetails.firstChild) {
       specsDetails.removeChild(specsDetails.firstChild);
     }
